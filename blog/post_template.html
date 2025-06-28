@@ -1,15 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
+
+<!-- 
+TO UPDATE:
+1. Title -- {{ UPDATE TITLE }}
+2. Subtitle -- {{ SUBTITLE }}
+3. Post content -- {{ POST CONTENT }}
+ -->
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>First Blog Post | Cody Sondgeroth</title>
+  <title>{{ UPDATE TITLE}}</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="/styles.css">
 </head>
 <body>
   <header>
-    <h1>First Blog Post</h1>
+    <h1>{{ TITLE }}</h1>
+    <p>{{ SUBTITLE }}</p>
     <nav>
       <a href="/index.html">Home</a>
       <a href="/blog/index.html">Blog</a>
@@ -18,12 +27,13 @@
 
   <main>
     <article>
-      <p>Welcome to my first blog post! This is where I share insights, updates, and thoughts on AI, security, and applied machine learning.</p>
+      <p>{{ POST CONTENT }}</p>
     </article>
   </main>
 
   <footer>
     &copy; 2025 Cody Sondgeroth. All rights reserved.
   </footer>
+
 </body>
 </html>
