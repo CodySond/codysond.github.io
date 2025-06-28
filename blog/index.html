@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blog | Cody Sondgeroth</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f9f9f9;
+      color: #333;
+    }
+    header {
+      background-color: #2d3748;
+      color: #fff;
+      padding: 2rem;
+      text-align: center;
+    }
+    h1 {
+      margin: 0;
+      font-size: 2rem;
+    }
+    main {
+      max-width: 800px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+    }
+    .post {
+      background-color: #fff;
+      padding: 1.5rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+      margin-bottom: 1.5rem;
+    }
+    .post a {
+      color: #3182ce;
+      text-decoration: none;
+    }
+    .post a:hover {
+      text-decoration: underline;
+    }
+    footer {
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.9rem;
+      color: #888;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Blog</h1>
+    <p>Insights and Updates</p>
+  </header>
+
+  <main>
+    <div id="posts">
+      <!-- Blog posts will be dynamically listed here -->
+    </div>
+  </main>
+
+  <footer>
+    &copy; 2025 Cody Sondgeroth. All rights reserved.
+  </footer>
+
+  <script>
+    const posts = [
+      { title: "First Blog Post", link: "post1.html" },
+      { title: "Second Blog Post", link: "post2.html" }
+    ];
+
+    const postsContainer = document.getElementById('posts');
+    posts.forEach(post => {
+      const postElement = document.createElement('div');
+      postElement.className = 'post';
+      postElement.innerHTML = `<a href="${post.link}">${post.title}</a>`;
+      postsContainer.appendChild(postElement);
+    });
+  </script>
+</body>
+</html>
