@@ -19,6 +19,14 @@
 
   <main>
     <div class="project">
+      <h2>GAN-Based Attacks on Image Detectors</h2>
+      <img src="/images/gan_attack.png" alt="Representative images from the fine-tuned GAN" class="project-image">
+      <p>Designed and tested a GAN to break the generative image detector published by Ojha et al in 2023 ("Towards Universal Fake Image Detectors that Generalize Across Generative Models"). The result was that the GAN was not able to increase the rate of images passing the detector, but this potentially exposes the detector as continuing to use "real" as the sink class despite the report of the original authors. This was completed as part of a group project in a graduate level course at UW-Madison</p>
+      <p>My role: design and implementation of the connection between the GAN and the detector as a replacement for the adversarial training network, running and compiling training and evaluation data, much of the write-up</p>
+      <p><a href="https://github.com/CodySond/gan_attack_on_generated_detector">View on GitHub</a></p>
+    </div>
+
+    <div class="project">
       <h2>Generative AI for Security Usability</h2>
       <p>My collaborators and I seek to improve the usability of account security interfaces by tying a generated image to each device. An initial version of this project was conducted for a class with a simplified user study in which users could pick out their assigned image from a panel of 5 a week after it was initially presented to them.</p>
       <p>My role: image generation pipeline, initial user study design and execution</p>
@@ -29,18 +37,12 @@
     <div class="project">
       <h2>Authorship Detection in Ancient Inscriptions</h2>
       <img src="https://asset.library.wisc.edu/1711.dl/WPAIPCollMedia/M/h1380-f3f4f.jpg" alt="Ancient script or computer vision analysis visualization" class="project-image">
+      <p class="figcaption">Image courtesy of <a href="https://digital.library.wisc.edu/1711.dl/3YSP3W4O6K6H38M">The Wisconsin Palmyrene Aramaic Inscription Project</a></p>
       <p>Using computer vision and pattern recognition to analyze authorship in a low-data setting (ancient Near East script). We had a total of approximately 100 letter examples, with the most populated individual letter having approximately 35 examples. From this, we were able to reliably discover the only known grouping in the dataset and find new promising groups.</p>
       <p>My role: redesigned training regimen, revamped evaluation procedure, tested variations of the computer vision model</p>
 <!--       <p><a href="#">View on GitHub</a></p> -->
       <p>Publication forthcoming in collaboration with the Classics Department at the University of Wisconsin-Madison</p>
       
-    </div>
-
-    <div class="project">
-      <h2>GAN-Based Attacks on Image Detectors</h2>
-      <p>Designed and tested a GAN to break the generative image detector published by Ojha et al in 2023 ("Towards Universal Fake Image Detectors that Generalize Across Generative Models"), revealing its vulnerabilities to adversarial perturbations. This was completed as part of a group project in a graduate level course at UW-Madison</p>
-      <p>My role: design and implementation of the connection between the GAN and the detector as a replacement for the adversarial training network, running and compiling training and evaluation data, much of the evaluation</p>
-      <p><a href="#">View on GitHub</a></p>
     </div>
   </main>
 

@@ -68,6 +68,12 @@ footer {
   object-fit: cover;
 }
 
+.figcaption {
+  text-align: center;
+  color: gray;
+  font-size: 0.9em;
+}
+
 /* Blog-specific styles */
 .post {
   background-color: #fff;
@@ -84,3 +90,4 @@ footer {
 .post a:hover {
   text-decoration: underline;
 }
+
