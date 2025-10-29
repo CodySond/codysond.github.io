@@ -19,6 +19,11 @@
 
   <main>
     <div class="project">
+      <h2>Diffusion-based Generated Image Detection</h2>
+      <p>I am currently refining the process explored by Zhang & Xu (2025) ("Diffusion Noise Feature: Accurate and Fast Generated Image Detection") of utilizing the image diffusion process to train a detector for generated imagery, including an expansion into generated videos (such as from Sora). Initial results have been promising, achieving 99.99% accuracies on a particularly difficult test set. The final results will be posted on arXiv when ready.</p>
+    </div>
+
+    <div class="project">
       <h2>GAN-Based Attacks on Image Detectors</h2>
       <img src="/images/gan_attack.png" alt="Representative images from the fine-tuned GAN" class="project-image">
       <p>Designed and tested a GAN to break the generative image detector published by Ojha et al in 2023 ("Towards Universal Fake Image Detectors that Generalize Across Generative Models"). The result was that the GAN was not able to increase the rate of images passing the detector, but this potentially exposes the detector as continuing to use "real" as the sink class despite the report of the original authors. This was completed as part of a group project in a graduate level course at UW-Madison</p>
