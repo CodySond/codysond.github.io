@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>On Zhang & Xu's Diffusion Noise Feature (2025)</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <header>
+    <h1>On Zhang & Xu's Diffusion Noise Feature (2025)</h1>
+    <p>An exploration of the innovative noise feature introduced by Zhang and Xu, both the potential flaws in their testing and the model's true capabilities</p>
+    <nav>
+      <a href="/index.html">Home</a>
+      <a href="/blog/index.html">Blog</a>
+    </nav>
+  </header>
+
+  <main>
+    <article>
+      <p>The Diffusion Noise Feature (DNF) introduced by Zhang & Xu (<a href="https://arxiv.org/abs/2312.02625v2">arXiv:2312.02625v2</a>) aims to revolutionize the AI-generated image detection space by incorporating a new feature: the amount of noise in an image as estimated by a diffusion model. If you look closely at a generated image, you may see some strange artifacts, such as skin or cloth looking overly smooth or excess noise around high detail areas like edges. This appears to be the flaws that the DNF is exploiting. I have completed independent testing and analysis of the DNF, and, though there are critical flaws in the analysis presented by Zhang & Xu, the DNF does actually perform very well.</p>
+      <br>
+      <p><strong>Flaws in Zhang & Xu's Testing</strong></p>
+      <p>The primary (and critical) flaw in their testing was a severe dataset imbalance, likely skewing their results. In their paper, they actually note this in Appendix B, however <strong>this is not noted in the primary text of the paper</strong>. Their test datasets have a vastly higher number of generated images than real images (e.g. their GenImage test dataset has 50,000 generated images compared to only 5,000 real images), making it difficult to draw accurate conclusions about the DNF's performance. We therefore basically need to disregard the accuracy scores that they present, because accuracy is severely affected by dataset composition. We then get on to the second flaw in their analysis: the lack of details on how precisely they trained and tested the model and baselines. For example, it is unclear what dataset they used for training. Importantly, they present Average Precision on the test datasets without mention of which version is being presented (macro vs micro), which is particularly problematic because of the dataset imbalance.</p>
+      <br>
+      <p><strong>Independent Testing Results</strong></p>
+      <p>To properly evaluate the DNF, I performed my own testing using balanced datasets. I utilize the datasets used by Ojha et al. (2024 - <a href="https://arxiv.org/abs/2302.10174">arXiv:2302.10174</a>), which are roughly balanced (53k generated images vs 47k real images). My results indicate that the DNF does indeed perform well, though not as well as the original paper suggests.</p>
+      <br>
+      <p><i>Ojha et al. dataset</i></p>
+      <figure class="metrics">
+        <figcaption><strong>Detection performance (Ojha et al. dataset — 70/15/15 split)</strong></figcaption>
+        <table class="metrics-table" aria-label="Model performance metrics">
+          <thead>
+            <tr>
+              <th scope="col">Split</th>
+              <th scope="col">ROC / AUC</th>
+              <th scope="col">Accuracy</th>
+              <th scope="col">AP (Average Precision)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">Train</th>
+              <td id="roc-train">0.9998</td>
+              <td id="acc-train">0.9973</td>
+              <td id="ap-train">0.9997</td>
+            </tr>
+            <tr>
+              <th scope="row">Validation</th>
+              <td id="roc-val"></td>
+              <td id="acc-val"></td>
+              <td id="ap-val"></td>
+            </tr>
+            <tr>
+              <th scope="row">Test</th>
+              <td id="roc-test">0.9994</td>
+              <td id="acc-test">0.9893</td>
+              <td id="ap-test">0.9995</td>
+            </tr>
+          </tbody>
+        </table>
+      </figure>
+      <br>
+      <p><i>CelebA</i></p>
+      <figure class="metrics">
+        <figcaption><strong>Detection performance (CelebA dataset)</strong></figcaption>
+        <table class="metrics-table" aria-label="Model performance metrics">
+          <thead>
+            <tr>
+              <th scope="col">Split</th>
+              <th scope="col">ROC / AUC</th>
+              <th scope="col">Accuracy</th>
+              <th scope="col">AP (Average Precision)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">Whole</th>
+              <td id="roc-whole">0.8918</td>
+              <td id="acc-whole">0.6908</td>
+              <td id="ap-whole">0.9594</td>
+            </tr>
+          </tbody>
+        </table>
+      </figure>
+      <br>
+      <p><i>CNNSpot (note: 1 real image added to make analysis script work)</i></p>
+      <figure class="metrics">
+        <figcaption><strong>Detection performance (CNNSpot dataset)</strong></figcaption>
+        <table class="metrics-table" aria-label="Model performance metrics">
+          <thead>
+            <tr>
+              <th scope="col">Split</th>
+              <th scope="col">ROC / AUC</th>
+              <th scope="col">Accuracy</th>
+              <th scope="col">AP (Average Precision)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">Whole</th>
+              <td id="roc-cnnspot">0.9999</td>
+              <td id="acc-cnnspot">0.9987</td>
+              <td id="ap-cnnspot">0.9999</td>
+            </tr>
+          </tbody>
+        </table>
+      </figure>
+      <br>
+      <p><i>Imagenet</i></p>
+      <figure class="metrics">
+        <figcaption><strong>Detection performance (Imagenet dataset)</strong></figcaption>
+        <table class="metrics-table" aria-label="Model performance metrics">
+          <thead>
+            <tr>
+              <th scope="col">Split</th>
+              <th scope="col">ROC / AUC</th>
+              <th scope="col">Accuracy</th>
+              <th scope="col">AP (Average Precision)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">Whole</th>
+              <td id="roc-imagenet">0.9281</td>
+              <td id="acc-imagenet">0.5023</td>
+              <td id="ap-imagenet">0.9886</td>
+            </tr>
+          </tbody>
+        </table>
+      </figure>
+      <br>
+      <p><i>LSUN</i></p>
+      <figure class="metrics">
+        <figcaption><strong>Detection performance (LSUN dataset)</strong></figcaption>
+        <table class="metrics-table" aria-label="Model performance metrics">
+          <thead>
+            <tr>
+              <th scope="col">Split</th>
+              <th scope="col">ROC / AUC</th>
+              <th scope="col">Accuracy</th>
+              <th scope="col">AP (Average Precision)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">Whole</th>
+              <td id="roc-lsun">0.9607</td>
+              <td id="acc-lsun">0.6848</td>
+              <td id="ap-lsun">0.9965</td>
+            </tr>
+          </tbody>
+        </table>
+      </figure>
+      <br>
+      <p><strong>Summary of testing</strong></p>
+      <p>In my testing, the DNF performs very well on the dataset and generators it was trained on. However, it struggles to generalize to out-of-distribution datasets, such as CelebA, Imagenet, and LSUN. This suggests that while the DNF is effective at detecting images from known generators, it may not be as reliable for detecting images from unknown or novel generators. The problem appears to be one of actually setting the right thresholds, as AP and ROC/AUC scores indicate a good understanding of the dataset but the accuracy score doesn't match. Viewing the confusion matrices on each dataset shows that the vast majority of the errors are coming from false negatives (i.e. <strong>missed detections</strong>).</p>
+      <br>
+      <p><strong>Conclusion</strong></p>
+      <p>In conclusion, while Zhang & Xu's Diffusion Noise Feature presents a promising approach to AI-generated image detection, their testing methodology has significant flaws that must be addressed. My independent testing indicates that the DNF does perform well, particularly on known datasets, but struggles with generalization to out-of-distribution data. Future work should focus on improving the model's robustness and evaluating its performance across a wider range of datasets and generators.</p>
+    </article>
+  </main>
+
+  <footer>
+    &copy; 2025 Cody Sondgeroth. All rights reserved.
+  </footer>
+
+</body>
+</html>
