@@ -91,3 +91,11 @@ footer {
   text-decoration: underline;
 }
 
+.post-date {
+  color: #718096;
+  font-size: 1rem;
+  margin: 0.5rem 0 1.5rem 0;
+  font-style: italic;
+  display: block;
+}
+
