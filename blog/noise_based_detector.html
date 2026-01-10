@@ -37,6 +37,7 @@
           This post presents an independent evaluation of the Diffusion Noise Feature (DNF) proposed by Zhang & Xu (2025) for AI-generated image detection. I identify critical flaws in their evaluation methodology, including severe dataset imbalance, and present balanced experimental results across multiple datasets. While DNF performs well in-distribution, it struggles with out-of-distribution generalization.
         </p>
       </section>
+      <h3>See also: <a href="noise_based_code_followup.html">Diffusion Noise Feature for AI-Generated Image Detection - Follow-up with More Issues</a></h3>
       <br>
       <p>The Diffusion Noise Feature (DNF) introduced by Zhang & Xu (<a href="https://arxiv.org/abs/2312.02625v2">arXiv:2312.02625v2</a>) aims to revolutionize the AI-generated image detection space by incorporating a new feature: the amount of noise in an image as estimated by a diffusion model. If you look closely at a generated image, you may see some strange artifacts, such as skin or cloth looking overly smooth or excess noise around high detail areas like edges. This appears to be the flaws that the DNF is exploiting. I have completed independent testing and analysis of the DNF, and, though there are critical flaws in the analysis presented by Zhang & Xu, the DNF does actually perform very well.</p>
       <br>

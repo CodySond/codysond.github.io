@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>  
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-83WCY4YMGF"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-83WCY4YMGF');
+  </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Independent evaluation of the Diffusion Noise Feature (DNF) for AI-generated image detection. Analysis of Zhang & Xu (2025), dataset imbalance issues, and out-of-distribution performance. Follow-up to original post, with more coverage of flaws in the JPEG compression testing and image resizing">
+  <title>Diffusion Noise Feature for AI-Generated Image Detection - Follow-up</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <header>
+    <h1>Diffusion Noise Feature for AI-Generated Image Detection - Follow-up with More Issues</h1>
+    <p>Since the original post, further analysis has revealed additional issues with the original Zhang & Xu (2025) paper, including flaws in the JPEG compression testing and image resizing methods.</p>
+    <p>For the original post, see <a href="noise_based_detector.html">Diffusion Noise Feature for AI-Generated Image Detection — Independent Analysis</a>.</p>
+    <time datetime="2026-01-09" class="post-date">9 January 2026</time>
+    <nav>
+      <a href="/index.html">Home</a>
+      <a href="/blog/index.html">Blog</a>
+    </nav>
+  </header>
+
+  <main>
+    <article>
+      <h2>Image Resizing</h2>
+
+      <p>
+        Closer analysis of the provided DNF code revaled that, instead of cropping as would be expected, the code simply resized the image. This is problematic for the original paper as this resizing, particularly for large images, will tend to destroy the noise present in the image, based on the assumption that the noise is Gaussian in nature (an assumption made in optics so fair here). Therefore, the conclusion that the model is actually attaching to noise patterns comes into question.
+      </p>
+
+      <h2>Testing</h2>
+
+      <p>
+        I have corrected this in the code and rerun the training and testing. In doing so, I found that performance remained high - achieving a 0.9946 accuracy, 0.9997 average precision, and 0.9997 AUC on the test dataset (0.9970-0.9999-0.9999 and 0.9946-0.9997-0.9997 for the train and validation sets respectively). Note that the dataset needed to be reprocessed to reflect the cropping logic. The splits are the same as in my original post.
+      </p>
+
+      <h2>JPEG Compression</h2>
+
+      <p>
+        I also noticed that the claimed results under JPEG compression were suspiciously good. I generated a new copy of the dataset where the input raw images were JPEG compressed with a random quality value between 20 and 95 prior to being put through the DNF process. Without retraining, this resulted in a 0.46 accuracy. Retraining raised this to approximately 0.85 before stalling (approximately 0.94 AUC and AP). Both results were on the test set, with similar results on the train and val sets. Similar results were found with the original resizing code.
+      </p>
+
+      <p>
+        This raises significant questions about the claims in the original paper, where they claimed that, even at a JPEG quality of 30, accuracy only dropped approximately 0.002, far less than I have found. It is also unclear whether they included compression in the original training set.
+      </p>
+
+      <h2>Conclusion</h2>
+
+      <p>
+        Overall, these findings suggest that some of the key conclusions in the original paper may be overstated or dependent on implementation details that were not fully accounted for. While correcting the image handling logic does not substantially degrade performance in the absence of compression, the dramatic sensitivity to JPEG compression raises concerns about the model's true robustness and what features it is actually learning.
+      </p>
+
+      <p>
+        In particular, the discrepancy between the reported compression robustness and the results observed here highlights the importance of clearly documenting preprocessing steps and training conditions. Further investigation is needed to determine whether the model can genuinely generalize beyond dataset-specific artifacts, or whether its performance relies on fragile signal characteristics that are easily disrupted by common image transformations.
+      </p>
+    </article>
+  </main>
+
+  <footer>
+    &copy; 2026 Cody Sondgeroth. All rights reserved.
+  </footer>
+
+</body>
+</html>
