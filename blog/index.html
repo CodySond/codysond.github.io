@@ -12,6 +12,7 @@
   </script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Portfolio of Cody Sondgeroth, highlighting research and projects in AI, Security, and Applied Machine Learning.">
   <title>Blog | Cody Sondgeroth</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/styles.css">
@@ -28,28 +29,23 @@
 
   <main>
     <div id="posts">
-      <!-- Blog posts will be dynamically listed here -->
+      <div class="post">
+        <a href="noise_based_code_followup.html">Diffusion Noise Feature for AI-Generated Image Detection - Follow-up with More Issues</a>
+        <p>Independent evaluation of the Diffusion Noise Feature (DNF) for AI-generated image detection. Analysis of Zhang &amp; Xu (2025), dataset imbalance issues, and out-of-distribution performance. Follow-up to original post, with more coverage of flaws in the JPEG compression testing and image resizing</p>
+      </div>
+      <div class="post">
+        <a href="noise_based_detector.html">On Zhang &amp; Xu's Diffusion Noise Feature (2025)</a>
+        <p>An exploration of the innovative noise feature introduced by Zhang and Xu, both the potential flaws in their testing and the model's true capabilities</p>
+      </div>
+      <div class="post">
+        <a href="post1.html">First Blog Post</a>
+        <p>First blog post.</p>
+      </div>
     </div>
   </main>
 
   <footer>
     &copy; 2026 Cody Sondgeroth. All rights reserved.
   </footer>
-
-  <script>
-    const posts = [
-      { title: "Diffusion Noise Feature for AI-Generated Image Detection - Follow-up with More Issues", link: "noise_based_code_followup.html", blurb: "Independent evaluation of the Diffusion Noise Feature (DNF) for AI-generated image detection. Analysis of Zhang & Xu (2025), dataset imbalance issues, and out-of-distribution performance. Follow-up to original post, with more coverage of flaws in the JPEG compression testing and image resizing" },
-      { title: "On Zhang & Xu's Diffusion Noise Feature (2025)", link: "noise_based_detector.html", blurb: "An exploration of the innovative noise feature introduced by Zhang and Xu, both the potential flaws in their testing and the model's true capabilities" },
-      { title: "First Blog Post", link: "post1.html", blurb: "First blog post." },
-    ];
-
-    const postsContainer = document.getElementById('posts');
-    posts.forEach(post => {
-      const postElement = document.createElement('div');
-      postElement.className = 'post';
-      postElement.innerHTML = `<a href="${post.link}">${post.title}</a><p>${post.blurb}</p>`;
-      postsContainer.appendChild(postElement);
-    });
-  </script>
 </body>
 </html>
